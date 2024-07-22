@@ -1,15 +1,12 @@
-import { ThemeProvider } from "@emotion/react"
-import { Button } from "@mui/material"
-import { LightTheme } from "./shared/theme"
-
+import { AppThemeProvider } from "./shared/contexts";
+import { AppRoutes } from "./routes/routes";
 
 function App() {
- 
   return (
-  <ThemeProvider theme={LightTheme}>
-    <Button variant="contained" color="primary">Olá Mundo</Button>
-  </ThemeProvider>
-  )
+    <AppThemeProvider>
+      <AppRoutes />
+    </AppThemeProvider>
+  );
 }
 
-export default App
+export default App;
