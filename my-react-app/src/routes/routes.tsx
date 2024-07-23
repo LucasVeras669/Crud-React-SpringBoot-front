@@ -1,14 +1,11 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
-import { useAppThemeContext } from "../shared/contexts"
-import { Button } from "@mui/material"
+import { Home } from "../pages"
 
 export const AppRoutes = () => {
-    const {toggleTheme } = useAppThemeContext()
-
     return (
        <BrowserRouter>
        <Routes>
-        <Route path="/" element={<Button variant="contained" color="primary" onClick={toggleTheme}>Pagina Inicial</Button>}/>
+        <Route path="/" element={<Home/>}/>
         <Route path="*" element={<Navigate to='/' />}/>
        </Routes>
        </BrowserRouter>
