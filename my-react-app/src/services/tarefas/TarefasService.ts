@@ -6,6 +6,11 @@ interface IListagemTarefas {
 
 }
 
+interface IDetalheTarefas {
+    id: number;
+
+}
+
 type TTarefasComTotalCount = {
     data: IListagemTarefas[];
    
@@ -26,13 +31,47 @@ const getAll = async (): Promise<TTarefasComTotalCount | Error> => {
     }
 }
 
-const getById = async (): Promise<any> => {}
+const getById = async (id: number): Promise<IDetalheTarefas | Error> => { 
+    try {
+        const { data } = await Api.get(`/tarefas/${id}`)
+        if(data) {
+            return data
+        }
 
-const create = async (): Promise<any> => {}
+        return new Error('Erro ao consultar os registros')
+    } catch (error) {
+        return new Error((error as { message: string }).message || 'Erro ao consultar os registros')
+    }
+}
 
-const updateById = async (): Promise<any> => {}
+const create = async (dados: Omit<IDetalheTarefas, 'id'>): Promise<number | Error> => { 
+    try {
+        const { data } = await Api.post<IDetalheTarefas>('/tarefas', dados)
+        if(data) {
+            return data.id
+        }
+        return new Error('Erro ao criar os registros')
+    } catch (error) {
+        return new Error((error as { message: string }).message || 'Erro ao criar os registros')
+    }
+}
 
-const deleteById = async (): Promise<any> => {}
+
+const updateById = async (id: number, dados: IDetalheTarefas ): Promise<void | Error> => {
+    try {
+        await Api.put(`/tarefas/${id}`, dados)
+    } catch (error) {
+        return new Error((error as { message: string }).message || 'Erro ao atualizar os registros')
+    }
+}
+
+const deleteById = async (id: number): Promise<void | Error> => {
+    try {
+        await Api.delete(`/tarefas/${id}`)
+    } catch (error) {
+        return new Error((error as { message: string }).message || 'Erro ao apagar os registros')
+    }
+}
 
 export const TarefasService = {
     getAll,
