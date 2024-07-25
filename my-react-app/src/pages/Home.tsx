@@ -1,4 +1,5 @@
 import { Box, Button, ButtonGroup, Divider, TextField } from "@mui/material";
+import { Environment } from "../shared/environment";
 // import { useAppThemeContext } from "../shared/contexts"
 
 export const Home = () => {
@@ -12,7 +13,7 @@ export const Home = () => {
       <Divider variant="middle" />
       <Box margin="20px">
         <TextField
-          placeholder="Pesquisar..."
+          placeholder={Environment.INPUT_DE_BUSCA}
           variant="outlined"
           fullWidth
           size="small"
