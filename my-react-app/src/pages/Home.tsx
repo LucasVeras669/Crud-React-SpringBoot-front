@@ -1,9 +1,30 @@
 import { Box, Button, ButtonGroup, Divider, TextField } from "@mui/material";
 import { Environment } from "../shared/environment";
-// import { useAppThemeContext } from "../shared/contexts"
+import { useEffect, useState } from "react";
+import { TarefasService } from "../services/tarefas/TarefasService";
+import database from  './../../mock/database.json'
+
 
 export const Home = () => {
-  // const {toggleTheme } = useAppThemeContext()
+
+  const [busca, setBusca] = useState('')
+  // console.log(busca)
+
+  const tarefasFiltradas = database.tarefas.filter((tarefa) => tarefa.titulo.includes(busca))
+
+  console.log(tarefasFiltradas)
+
+  useEffect(()=>{
+    TarefasService.getAll().then((result) => {
+      if(result instanceof Error){
+        alert(result.message)
+      }else{
+       console.log(result)
+      }
+    })
+
+  },[])
+  
 
   return (
     <>
@@ -15,6 +36,8 @@ export const Home = () => {
         <TextField
           placeholder={Environment.INPUT_DE_BUSCA}
           variant="outlined"
+          value={busca}
+          onChange={(ev) => setBusca(ev.target.value)}
           fullWidth
           size="small"
         />
@@ -27,6 +50,8 @@ export const Home = () => {
           <Button>Nova Tarefa</Button>
         </ButtonGroup>
       </Box>
+
+
     </>
   );
 };
