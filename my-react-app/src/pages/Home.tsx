@@ -1,34 +1,58 @@
-import { Box, Button, ButtonGroup, Divider, TextField } from "@mui/material";
-import { Environment } from "../shared/environment";
 import { useEffect, useState } from "react";
-import { TarefasService } from "../services/tarefas/TarefasService";
+import { Environment } from "../shared/environment";
 import database from "./../../mock/database.json";
+import { DataGrid } from '@mui/x-data-grid';
 import { useDebounce } from "../hooks";
+
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  Divider,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TextField,
+} from "@mui/material";
+import {
+  IListagemTarefas,
+  TarefasService,
+} from "../services/tarefas/TarefasService";
 
 export const Home = () => {
   const [busca, setBusca] = useState("");
   const { debounce } = useDebounce();
+
+  const [rows, setRows] = useState<IListagemTarefas[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
   // console.log(busca)
 
   // const tarefasFiltradas = database.tarefas.filter((tarefa) =>
   //   tarefa.titulo.includes(busca)
   // );
 
-
   useEffect(() => {
+    setIsLoading(true);
+
     debounce(() => {
       TarefasService.getAll().then((result) => {
+        setIsLoading(false);
         if (result instanceof Error) {
           alert(result.message);
         } else {
-          console.log(result);
+          setRows(result.data);
         }
       });
     });
   }, [busca]);
 
   return (
-    <>
+    <Box boxSizing='border-box' marginLeft='4px' marginRight='4px'>
       <Box margin="20px">
         <h1>Tarefas</h1>
       </Box>
@@ -44,13 +68,44 @@ export const Home = () => {
         />
       </Box>
 
-      <Box display="flex" justifyContent="flex-end" marginRight="20px">
+      <Box display="flex" justifyContent="flex-end" marginRight="20px" marginBottom='14px'>
         <ButtonGroup>
           <Button>Limpar</Button>
           <Button>Consultar </Button>
           <Button>Nova Tarefa</Button>
         </ButtonGroup>
       </Box>
-    </>
+
+      <TableContainer component={Paper} variant="outlined">
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell>Título</TableCell>
+            <TableCell align="center">Descrição</TableCell>
+            <TableCell align="center">Data de Criação</TableCell>
+            <TableCell align="center">Status</TableCell>
+            <TableCell align="center">Data da Conclusão</TableCell>
+            <TableCell align="center">Ação</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {rows.map((row) => (
+            <TableRow key={row.id}
+  >
+            <TableCell>
+                {row.titulo}
+              </TableCell>
+              <TableCell align="center">{row.descricao}</TableCell>
+              <TableCell align="center">{row.dataCriacao}</TableCell>
+              <TableCell align="center">{row.status.status1}</TableCell>
+              <TableCell align="center">{row.dataConclusao}</TableCell>
+              <TableCell align="center">{row.acao}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+    
+    </Box>
   );
 };

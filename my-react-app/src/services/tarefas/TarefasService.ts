@@ -1,6 +1,6 @@
 import { Api } from "../../shared/api/axios-config";
 
-interface IListagemTarefas {
+export interface IListagemTarefas {
   id: number;
   titulo: string;
   descricao: string;
@@ -11,10 +11,11 @@ interface IListagemTarefas {
     status2: string;
     status3: string;
   };
+  acao: string
  
 }
 
-interface IDetalheTarefas {
+export interface IDetalheTarefas {
   id: number;
   titulo: string;
   descricao: string;

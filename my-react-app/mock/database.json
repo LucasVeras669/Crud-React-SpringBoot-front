@@ -1,13 +1,83 @@
-
- {
-    "tarefas": [
-      { "id": "1", "titulo": "tarefa 1", "descricao": " ", "dataCriacao": "23/07/2024" , "dataConclusao": "24/07/2024", 
+{
+  "tarefas": [
+    {
+      "id": "1",
+      "titulo": "tarefa 1",
+      "descricao": "ddfdfdf",
+      "dataCriacao": "23/07/2024",
+      "dataConclusao": "24/07/2024",
       "status": {
         "status1": "ABERTO",
         "status2": "ANDAMENTO",
         "status3": "CONCLUÍDA"
-      }}
-      
-    ]
-  
-  }
+      },
+      "acao": " "
+    },
+
+    {
+      "id": "2",
+      "titulo": "tarefa 2",
+      "descricao": "ddfdfdf",
+      "dataCriacao": "23/07/2024",
+      "dataConclusao": "24/07/2024",
+      "status": {
+        "status1": "ABERTO",
+        "status2": "ANDAMENTO",
+        "status3": "CONCLUÍDA"
+      },
+      "acao": " "
+    },
+    {
+      "id": "3",
+      "titulo": "tarefa 3",
+      "descricao": "ddfdfdf",
+      "dataCriacao": "23/07/2024",
+      "dataConclusao": "24/07/2024",
+      "status": {
+        "status1": "ABERTO",
+        "status2": "ANDAMENTO",
+        "status3": "CONCLUÍDA"
+      },
+      "acao": " "
+    },
+    {
+      "id": "4",
+      "titulo": "tarefa 4",
+      "descricao": "ddfdfdf",
+      "dataCriacao": "23/07/2024",
+      "dataConclusao": "24/07/2024",
+      "status": {
+        "status1": "ABERTO",
+        "status2": "ANDAMENTO",
+        "status3": "CONCLUÍDA"
+      },
+      "acao": " "
+    },
+    {
+      "id": "5",
+      "titulo": "tarefa 5",
+      "descricao": "ddfdfdf",
+      "dataCriacao": "23/07/2024",
+      "dataConclusao": "24/07/2024",
+      "status": {
+        "status1": "ABERTO",
+        "status2": "ANDAMENTO",
+        "status3": "CONCLUÍDA"
+      },
+      "acao": " "
+    },
+    {
+      "id": "6",
+      "titulo": "tarefa 6",
+      "descricao": "ddfdfdf",
+      "dataCriacao": "23/07/2024",
+      "dataConclusao": "24/07/2024",
+      "status": {
+        "status1": "ABERTO",
+        "status2": "ANDAMENTO",
+        "status3": "CONCLUÍDA"
+      },
+      "acao": " "
+    }
+  ]
+}
