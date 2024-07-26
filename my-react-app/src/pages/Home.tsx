@@ -101,7 +101,7 @@ export const Home = () => {
                 <TableCell align="center">{row.dataCriacao}</TableCell>
                 <TableCell align="center">{row.status.status1}</TableCell>
                 <TableCell align="center">{row.dataConclusao}</TableCell>
-                <TableCell align="center">{row.acao}</TableCell>
+                <TableCell align="center">{row.acao.editar} {row.acao.apagar}</TableCell>
               </TableRow>
             ))}
           </TableBody>

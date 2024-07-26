@@ -11,7 +11,10 @@ export interface IListagemTarefas {
     status2: string;
     status3: string;
   };
-  acao: string
+  acao: {
+    editar: string
+    apagar: string
+  }
  
 }
 
@@ -26,6 +29,10 @@ export interface IDetalheTarefas {
     status2: string;
     status3: string;
   };
+  acao: {
+    editar: string
+    apagar: string
+  }
 
 }
 

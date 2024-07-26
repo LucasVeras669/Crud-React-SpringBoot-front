@@ -11,7 +11,10 @@
         "status2": "ANDAMENTO",
         "status3": "CONCLUÍDA"
       },
-      "acao": " "
+      "acao": {
+        "editar": "editar",
+        "apagar": "apagar"
+      }
     },
 
     {
@@ -25,7 +28,10 @@
         "status2": "ANDAMENTO",
         "status3": "CONCLUÍDA"
       },
-      "acao": " "
+      "acao": {
+        "editar": "editar",
+        "apagar": "apagar"
+      }
     },
     {
       "id": "3",
@@ -38,7 +44,10 @@
         "status2": "ANDAMENTO",
         "status3": "CONCLUÍDA"
       },
-      "acao": " "
+      "acao": {
+        "editar": "editar",
+        "apagar": "apagar"
+      }
     },
     {
       "id": "4",
@@ -51,7 +60,10 @@
         "status2": "ANDAMENTO",
         "status3": "CONCLUÍDA"
       },
-      "acao": " "
+      "acao": {
+        "editar": "editar",
+        "apagar": "apagar"
+      }
     },
     {
       "id": "5",
@@ -64,7 +76,10 @@
         "status2": "ANDAMENTO",
         "status3": "CONCLUÍDA"
       },
-      "acao": " "
+      "acao": {
+        "editar": "editar",
+        "apagar": "apagar"
+      }
     },
     {
       "id": "6",
@@ -77,7 +92,10 @@
         "status2": "ANDAMENTO",
         "status3": "CONCLUÍDA"
       },
-      "acao": " "
+      "acao": {
+        "editar": "editar",
+        "apagar": "apagar"
+      }
     }
   ]
 }
