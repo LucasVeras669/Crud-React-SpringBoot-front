@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Environment } from "../shared/environment";
 import database from "./../../mock/database.json";
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid } from "@mui/x-data-grid";
 import { useDebounce } from "../hooks";
 
 import {
@@ -9,11 +9,13 @@ import {
   Button,
   ButtonGroup,
   Divider,
+  LinearProgress,
   Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
+  TableFooter,
   TableHead,
   TableRow,
   TextField,
@@ -30,11 +32,9 @@ export const Home = () => {
   const [rows, setRows] = useState<IListagemTarefas[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // console.log(busca)
-
-  // const tarefasFiltradas = database.tarefas.filter((tarefa) =>
-  //   tarefa.titulo.includes(busca)
-  // );
+  const tarefasFiltradas = rows.filter((tarefa) =>
+  tarefa.titulo.includes(busca)
+ );
 
   useEffect(() => {
     setIsLoading(true);
@@ -52,7 +52,7 @@ export const Home = () => {
   }, [busca]);
 
   return (
-    <Box boxSizing='border-box' marginLeft='4px' marginRight='4px'>
+    <Box boxSizing="border-box" marginLeft="4px" marginRight="4px">
       <Box margin="20px">
         <h1>Tarefas</h1>
       </Box>
@@ -68,7 +68,12 @@ export const Home = () => {
         />
       </Box>
 
-      <Box display="flex" justifyContent="flex-end" marginRight="20px" marginBottom='14px'>
+      <Box
+        display="flex"
+        justifyContent="flex-end"
+        marginRight="20px"
+        marginBottom="14px"
+      >
         <ButtonGroup>
           <Button>Limpar</Button>
           <Button>Consultar </Button>
@@ -77,35 +82,40 @@ export const Home = () => {
       </Box>
 
       <TableContainer component={Paper} variant="outlined">
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Título</TableCell>
-            <TableCell align="center">Descrição</TableCell>
-            <TableCell align="center">Data de Criação</TableCell>
-            <TableCell align="center">Status</TableCell>
-            <TableCell align="center">Data da Conclusão</TableCell>
-            <TableCell align="center">Ação</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.id}
-  >
-            <TableCell>
-                {row.titulo}
-              </TableCell>
-              <TableCell align="center">{row.descricao}</TableCell>
-              <TableCell align="center">{row.dataCriacao}</TableCell>
-              <TableCell align="center">{row.status.status1}</TableCell>
-              <TableCell align="center">{row.dataConclusao}</TableCell>
-              <TableCell align="center">{row.acao}</TableCell>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Título</TableCell>
+              <TableCell align="center">Descrição</TableCell>
+              <TableCell align="center">Data de Criação</TableCell>
+              <TableCell align="center">Status</TableCell>
+              <TableCell align="center">Data da Conclusão</TableCell>
+              <TableCell align="center">Ação</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-    
+          </TableHead>
+          <TableBody>
+            {tarefasFiltradas.map((row) => (
+              <TableRow key={row.id}>
+                <TableCell>{row.titulo}</TableCell>
+                <TableCell align="center">{row.descricao}</TableCell>
+                <TableCell align="center">{row.dataCriacao}</TableCell>
+                <TableCell align="center">{row.status.status1}</TableCell>
+                <TableCell align="center">{row.dataConclusao}</TableCell>
+                <TableCell align="center">{row.acao}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+          <TableFooter>
+            {isLoading && (
+              <TableRow>
+                <TableCell colSpan={6}>
+                  <LinearProgress variant="indeterminate" />
+                </TableCell>
+              </TableRow>
+            )}
+          </TableFooter>
+        </Table>
+      </TableContainer>
     </Box>
   );
 };
