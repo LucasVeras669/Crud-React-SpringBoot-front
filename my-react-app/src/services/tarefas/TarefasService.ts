@@ -1,4 +1,5 @@
 import { Api } from "../../shared/api/axios-config";
+import { Environment } from "../../shared/environment";
 
 export interface IListagemTarefas {
   id: number;
@@ -12,8 +13,8 @@ export interface IListagemTarefas {
     status3: string;
   };
   acao: {
-    editar: string
-    apagar: string
+    editar: () => void
+    apagar: () => void
   }
  
 }
@@ -30,22 +31,24 @@ export interface IDetalheTarefas {
     status3: string;
   };
   acao: {
-    editar: string
-    apagar: string
+    editar: () => void
+    apagar: () => void
   }
 
 }
 
-type TTarefasComTotalCount = {
+export type TTarefasComTotalCount = {
   data: IListagemTarefas[];
+  totalCount: number
 };
 
 const getAll = async (): Promise<TTarefasComTotalCount | Error> => {
   try {
-    const { data } = await Api.get("/tarefas");
+    const { data, headers} = await Api.get("/tarefas");
     if (data) {
       return {
         data,
+        totalCount: Number(headers['x-total-count'] || Environment.LIMITE_DE_LINHAS )
       };
     }
 
