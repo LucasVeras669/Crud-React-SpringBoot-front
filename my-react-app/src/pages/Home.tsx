@@ -51,8 +51,12 @@ export const Home = () => {
     page * rowsPerPage,
     page * rowsPerPage + rowsPerPage
   );
+ 
+  const clean = () => {
+    setBusca('')
+  }
 
-  useEffect(() => {
+  const search = () => {
     setIsLoading(true);
 
     debounce(() => {
@@ -65,6 +69,10 @@ export const Home = () => {
         }
       });
     });
+  }
+
+  useEffect(() => {
+    search()
   }, [busca]);
 
   return (
@@ -91,8 +99,8 @@ export const Home = () => {
         marginBottom="14px"
       >
         <ButtonGroup>
-          <Button>Limpar</Button>
-          <Button>Consultar </Button>
+        <Button onClick={clean}>Limpar</Button>
+          <Button onClick={search}>Consultar </Button>
           <Button>Nova Tarefa</Button>
         </ButtonGroup>
       </Box>
@@ -118,7 +126,7 @@ export const Home = () => {
                 <TableCell align="center">{row.status.status1}</TableCell>
                 <TableCell align="center">{row.dataConclusao}</TableCell>
                 <TableCell align="center">
-                  <Button>{row.acao.editar}</Button>{" "}
+                  <Button >{row.acao.editar}</Button>
                   <Button color="error">{row.acao.apagar}</Button>
                 </TableCell>
               </TableRow>
