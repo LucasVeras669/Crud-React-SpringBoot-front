@@ -52,13 +52,14 @@ export const Home = () => {
     page * rowsPerPage + rowsPerPage
   );
  
+ 
+ 
   const clean = () => {
     setBusca('')
   }
 
   const search = () => {
     setIsLoading(true);
-
     debounce(() => {
       TarefasService.getAll().then((result) => {
         setIsLoading(false);
@@ -99,7 +100,7 @@ export const Home = () => {
         marginBottom="14px"
       >
         <ButtonGroup>
-        <Button onClick={clean}>Limpar</Button>
+          <Button onClick={clean}>Limpar</Button>
           <Button onClick={search}>Consultar </Button>
           <Button>Nova Tarefa</Button>
         </ButtonGroup>
@@ -126,7 +127,7 @@ export const Home = () => {
                 <TableCell align="center">{row.status.status1}</TableCell>
                 <TableCell align="center">{row.dataConclusao}</TableCell>
                 <TableCell align="center">
-                  <Button >{row.acao.editar}</Button>
+                  <Button>{row.acao.editar}</Button>
                   <Button color="error">{row.acao.apagar}</Button>
                 </TableCell>
               </TableRow>
@@ -166,4 +167,4 @@ export const Home = () => {
       </TableContainer>
     </Box>
   );
-};
+}
