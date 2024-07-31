@@ -23,7 +23,7 @@ import {
   IListagemTarefas,
   TarefasService,
 } from "../services/tarefas/TarefasService";
-import { Form } from "../shared/components/Form";
+import { Form } from "../shared/components/formulario/Form";
 
 export const Home = () => {
   const [busca, setBusca] = useState("");
@@ -76,6 +76,24 @@ export const Home = () => {
       });
     });
   };
+  const handleDelete = (id: number) => {
+    console.log(id) 
+    if (confirm("Realmente deseja apagar?")) {
+      TarefasService.deleteById(id).then((result) => {
+        if (result instanceof Error) {
+          alert(result.message);
+        } else {
+          setRows((oldRows) => [
+            ...oldRows.filter((oldRow) => oldRow.id !== id),
+          ]);
+
+          alert("Registo apagado com sucesso");
+        }
+      });
+    }
+  }
+
+ 
 
   useEffect(() => {
     search();
@@ -135,7 +153,7 @@ export const Home = () => {
                 <TableCell align="center">{row.dataConclusao}</TableCell>
                 <TableCell align="center">
                   <Button onClick={handlePageForm}>{row.acao.editar}</Button>
-                  <Button color="error">{row.acao.apagar}</Button>
+                  <Button onClick={() => handleDelete(row.id)} color="error">{row.acao.apagar}</Button>
                 </TableCell>
               </TableRow>
             ))}
