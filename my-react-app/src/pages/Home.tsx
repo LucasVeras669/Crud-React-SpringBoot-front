@@ -23,6 +23,7 @@ import {
   IListagemTarefas,
   TarefasService,
 } from "../services/tarefas/TarefasService";
+import { Form } from "../shared/components/Form";
 
 export const Home = () => {
   const [busca, setBusca] = useState("");
@@ -33,6 +34,12 @@ export const Home = () => {
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+
+  const [open, setOpen] = useState(false);
+
+  const handlePageForm = () => {
+    setOpen(true)
+  }
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -51,12 +58,10 @@ export const Home = () => {
     page * rowsPerPage,
     page * rowsPerPage + rowsPerPage
   );
- 
- 
- 
+
   const clean = () => {
-    setBusca('')
-  }
+    setBusca("");
+  };
 
   const search = () => {
     setIsLoading(true);
@@ -70,10 +75,10 @@ export const Home = () => {
         }
       });
     });
-  }
+  };
 
   useEffect(() => {
-    search()
+    search();
   }, [busca]);
 
   return (
@@ -102,8 +107,10 @@ export const Home = () => {
         <ButtonGroup>
           <Button onClick={clean}>Limpar</Button>
           <Button onClick={search}>Consultar </Button>
-          <Button>Nova Tarefa</Button>
+          <Button onClick={handlePageForm}>Nova Tarefa</Button>
+          
         </ButtonGroup>
+        
       </Box>
 
       <TableContainer component={Paper} variant="outlined">
@@ -127,7 +134,7 @@ export const Home = () => {
                 <TableCell align="center">{row.status.status1}</TableCell>
                 <TableCell align="center">{row.dataConclusao}</TableCell>
                 <TableCell align="center">
-                  <Button>{row.acao.editar}</Button>
+                  <Button onClick={handlePageForm}>{row.acao.editar}</Button>
                   <Button color="error">{row.acao.apagar}</Button>
                 </TableCell>
               </TableRow>
@@ -146,7 +153,7 @@ export const Home = () => {
                 <TableCell colSpan={6}>
                   <TablePagination
                     component="div"
-                    rowsPerPageOptions={[5,10,25,50,100]}
+                    rowsPerPageOptions={[5, 10, 25, 50, 100]}
                     count={tarefasFiltradas.length}
                     page={page}
                     onPageChange={handleChangePage}
@@ -165,6 +172,9 @@ export const Home = () => {
           </TableFooter>
         </Table>
       </TableContainer>
+      {open && (
+              <Form/>
+            )}
     </Box>
   );
-}
+};
