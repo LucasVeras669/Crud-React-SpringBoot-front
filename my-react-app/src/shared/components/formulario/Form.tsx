@@ -8,13 +8,11 @@ import {
   Select,
   TextField,
 } from "@mui/material";
-
+import { Calendario } from "../calendario/Calendario";
 
 export const Form = () => {
-
-
   return (
-    <Box minHeight='50vh'>
+    <Box minHeight="80vh">
       <Box margin="20px">
         <h2>Novas Tarefas/ Editar</h2>
       </Box>
@@ -39,20 +37,32 @@ export const Form = () => {
             </Box>
 
             <FormControl>
-              <Box marginBottom='10px' width="100%">
-                <Box >
+              <Box marginTop="8px" marginBottom="10px" width="100%">
+                <Box display="flex" justifyContent="space-around">
                   <h3>Status</h3>
+                  <h3>Data de Conclusão </h3>
                 </Box>
-
-                <Select fullWidth size="small">
-                  <MenuItem value="ABERTO">ABERTO</MenuItem>
-                  <MenuItem value="ANDAMENTO">ANDAMENTO</MenuItem>
-                  <MenuItem value="CONCLUÍDA">CONCLUÍDA</MenuItem>
-                </Select>
+                <Box display="flex">
+                  <Box width="50%">
+                    <Select fullWidth size="small">
+                      <MenuItem value="ABERTO">ABERTO</MenuItem>
+                      <MenuItem value="ANDAMENTO">ANDAMENTO</MenuItem>
+                      <MenuItem value="CONCLUÍDA">CONCLUÍDA</MenuItem>
+                    </Select>
+                  </Box>
+                  <Box width="50%">
+                    <Calendario />
+                  </Box>
+                </Box>
               </Box>
             </FormControl>
           </FormControl>
-          <Button variant="contained">Salvar</Button>
+
+          <Box marginTop="20px">
+            <Button fullWidth variant="contained">
+              Salvar
+            </Button>
+          </Box>
         </FormGroup>
       </Box>
     </Box>

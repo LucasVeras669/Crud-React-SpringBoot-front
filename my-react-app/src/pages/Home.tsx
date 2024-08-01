@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Environment } from "../shared/environment";
 import { useDebounce } from "../hooks";
 
@@ -62,8 +62,8 @@ export const Home = () => {
   const clean = () => {
     setBusca("");
   };
-
-  const search = () => {
+ 
+  const search = useCallback(() => {
     setIsLoading(true);
     debounce(() => {
       TarefasService.getAll().then((result) => {
@@ -75,7 +75,9 @@ export const Home = () => {
         }
       });
     });
-  };
+
+  }, [debounce])
+
   const handleDelete = (id: number) => {
     console.log(id) 
     if (confirm("Realmente deseja apagar?")) {
@@ -93,11 +95,10 @@ export const Home = () => {
     }
   }
 
- 
 
   useEffect(() => {
     search();
-  }, [busca]);
+  }, [search]);
 
   return (
     <Box boxSizing="border-box" marginLeft="4px" marginRight="4px">

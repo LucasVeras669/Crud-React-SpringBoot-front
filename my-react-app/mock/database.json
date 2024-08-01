@@ -49,22 +49,6 @@
       }
     },
     {
-      "id": "4",
-      "titulo": "tarefa 4",
-      "descricao": "ddfdfdf",
-      "dataCriacao": "23/07/2024",
-      "dataConclusao": "24/07/2024",
-      "status": {
-        "status1": "ABERTO",
-        "status2": "ANDAMENTO",
-        "status3": "CONCLUÍDA"
-      },
-      "acao": {
-        "editar": "editar",
-        "apagar": "apagar"
-      }
-    },
-    {
       "id": "5",
       "titulo": "tarefa 5",
       "descricao": "ddfdfdf",
