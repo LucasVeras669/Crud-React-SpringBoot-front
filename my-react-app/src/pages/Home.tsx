@@ -37,15 +37,16 @@ export const Home = () => {
 
   const [open, setOpen] = useState(false);
 
-  const handlePageForm = () => {
-    setOpen(true)
+  const handlePageForm = (item: any) => {
+    console.log(item, 'item')
+    // setOpen(true)
   }
 
-  const handleChangePage = (event, newPage) => {
+  const handleChangePage = (newPage:any) => {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (event) => {
+  const handleChangeRowsPerPage = (event:any) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
@@ -58,10 +59,15 @@ export const Home = () => {
     page * rowsPerPage,
     page * rowsPerPage + rowsPerPage
   );
-
+  console.log(paginatedTasks)
+  
   const clean = () => {
     setBusca("");
   };
+
+  const handleBuscar = () => {
+    search()
+  }
  
   const search = useCallback(() => {
     setIsLoading(true);
@@ -150,11 +156,11 @@ export const Home = () => {
                 <TableCell>{row.titulo}</TableCell>
                 <TableCell align="center">{row.descricao}</TableCell>
                 <TableCell align="center">{row.dataCriacao}</TableCell>
-                <TableCell align="center">{row.status.status1}</TableCell>
+                <TableCell align="center">{row.status}</TableCell>
                 <TableCell align="center">{row.dataConclusao}</TableCell>
                 <TableCell align="center">
-                  <Button onClick={handlePageForm}>{row.acao.editar}</Button>
-                  <Button onClick={() => handleDelete(row.id)} color="error">{row.acao.apagar}</Button>
+                  <Button onClick={() =>handlePageForm(row)}>EDITAR</Button>
+                  <Button onClick={() => handleDelete(row.id)} color="error">APAGAR</Button>
                 </TableCell>
               </TableRow>
             ))}
@@ -182,8 +188,7 @@ export const Home = () => {
                     labelDisplayedRows={({ from, to, count }) =>
                       `${from}-${to} de ${count}`
                     }
-                    backLabel="Anterior"
-                    nextLabel="Próxima"
+                    
                   />
                 </TableCell>
               </TableRow>
@@ -192,7 +197,7 @@ export const Home = () => {
         </Table>
       </TableContainer>
       {open && (
-              <Form/>
+              <Form buscar={handleBuscar}/>
             )}
     </Box>
   );

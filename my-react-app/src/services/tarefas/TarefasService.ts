@@ -7,33 +7,16 @@ export interface IListagemTarefas {
   descricao: string;
   dataCriacao: string;
   dataConclusao: string;
-  status: {
-    status1: string;
-    status2: string;
-    status3: string;
-  };
-  acao: {
-    editar: () => void
-    apagar: () => void
-  }
- 
+  status: 'ABERTO' | 'ANDAMENTO' | 'FECHADO'
+
 }
 
 export interface IDetalheTarefas {
-  id: number;
   titulo: string;
   descricao: string;
-  dataCriacao: string;
-  dataConclusao: string;
-  status: {
-    status1: string;
-    status2: string;
-    status3: string;
-  };
-  acao: {
-    editar: () => void
-    apagar: () => void
-  }
+  dataCriacao: string ;
+  dataConclusao: string | null;
+  status: string
 
 }
 
@@ -75,15 +58,14 @@ const getById = async (id: number): Promise<IDetalheTarefas | Error> => {
   }
 };
 
-const create = async (
-  dados: Omit<IDetalheTarefas, "id">
-): Promise<number | Error> => {
+
+
+const create = async (dados: IDetalheTarefas) => {
   try {
     const { data } = await Api.post<IDetalheTarefas>("/tarefas", dados);
-    if (data) {
-      return data.id;
-    }
-    return new Error("Erro ao criar os registros");
+    
+    console.log(data)
+  
   } catch (error) {
     return new Error(
       (error as { message: string }).message || "Erro ao criar os registros"

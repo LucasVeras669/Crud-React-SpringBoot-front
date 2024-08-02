@@ -6,143 +6,31 @@
       "descricao": "ddfdfdf",
       "dataCriacao": "23/07/2024",
       "dataConclusao": "24/07/2024",
-      "status": {
-        "status1": "ABERTO",
-        "status2": "ANDAMENTO",
-        "status3": "CONCLUÍDA"
-      },
-      "acao": {
-        "editar": "editar",
-        "apagar": "apagar"
-      }
+      "status": "ABERTO"
     },
     {
-      "id": "2",
+      "id": "854d",
       "titulo": "tarefa 2",
-      "descricao": "ddfdfdf",
-      "dataCriacao": "23/07/2024",
-      "dataConclusao": "24/07/2024",
-      "status": {
-        "status1": "ABERTO",
-        "status2": "ANDAMENTO",
-        "status3": "CONCLUÍDA"
-      },
-      "acao": {
-        "editar": "editar",
-        "apagar": "apagar"
-      }
+      "descricao": "tarefa",
+      "dataCriacao": "02/08/2024",
+      "dataConclusao": null,
+      "status": "ABERTO"
     },
     {
-      "id": "3",
-      "titulo": "tarefa 3",
-      "descricao": "ddfdfdf",
-      "dataCriacao": "23/07/2024",
-      "dataConclusao": "24/07/2024",
-      "status": {
-        "status1": "ABERTO",
-        "status2": "ANDAMENTO",
-        "status3": "CONCLUÍDA"
-      },
-      "acao": {
-        "editar": "editar",
-        "apagar": "apagar"
-      }
+      "id": "2217",
+      "titulo": "Titulo 3",
+      "descricao": "Lucas Veras",
+      "dataCriacao": "02/08/2024",
+      "dataConclusao": null,
+      "status": "ABERTO"
     },
     {
-      "id": "5",
-      "titulo": "tarefa 5",
-      "descricao": "ddfdfdf",
-      "dataCriacao": "23/07/2024",
-      "dataConclusao": "24/07/2024",
-      "status": {
-        "status1": "ABERTO",
-        "status2": "ANDAMENTO",
-        "status3": "CONCLUÍDA"
-      },
-      "acao": {
-        "editar": "editar",
-        "apagar": "apagar"
-      }
-    },
-    {
-      "id": "6",
-      "titulo": "tarefa 6",
-      "descricao": "ddfdfdf",
-      "dataCriacao": "23/07/2024",
-      "dataConclusao": "24/07/2024",
-      "status": {
-        "status1": "ABERTO",
-        "status2": "ANDAMENTO",
-        "status3": "CONCLUÍDA"
-      },
-      "acao": {
-        "editar": "editar",
-        "apagar": "apagar"
-      }
-    },
-    {
-      "id": "7",
-      "titulo": "tarefa 7",
-      "descricao": "ddfdfdf",
-      "dataCriacao": "23/07/2024",
-      "dataConclusao": "24/07/2024",
-      "status": {
-        "status1": "ABERTO",
-        "status2": "ANDAMENTO",
-        "status3": "CONCLUÍDA"
-      },
-      "acao": {
-        "editar": "editar",
-        "apagar": "apagar"
-      }
-    },
-    {
-      "id": "8",
-      "titulo": "tarefa 8",
-      "descricao": "ddfdfdf",
-      "dataCriacao": "23/07/2024",
-      "dataConclusao": "24/07/2024",
-      "status": {
-        "status1": "ABERTO",
-        "status2": "ANDAMENTO",
-        "status3": "CONCLUÍDA"
-      },
-      "acao": {
-        "editar": "editar",
-        "apagar": "apagar"
-      }
-    },
-    {
-      "id": "9",
-      "titulo": "tarefa 9",
-      "descricao": "ddfdfdf",
-      "dataCriacao": "23/07/2024",
-      "dataConclusao": "24/07/2024",
-      "status": {
-        "status1": "ABERTO",
-        "status2": "ANDAMENTO",
-        "status3": "CONCLUÍDA"
-      },
-      "acao": {
-        "editar": "editar",
-        "apagar": "apagar"
-      }
-    },
-    {
-      "id": "11",
-      "titulo": "tarefa 11",
-      "descricao": "ddfdfdf",
-      "dataCriacao": "23/07/2024",
-      "dataConclusao": "24/07/2024",
-      "status": {
-        "status1": "ABERTO",
-        "status2": "ANDAMENTO",
-        "status3": "CONCLUÍDA"
-      },
-      "acao": {
-        "editar": "editar",
-        "apagar": "apagar"
-      }
+      "id": "66f3",
+      "titulo": "Titulo 4",
+      "descricao": "Nemésio Veloso",
+      "dataCriacao": "02/08/2024",
+      "dataConclusao": null,
+      "status": "ANDAMENTO"
     }
   ]
 }
