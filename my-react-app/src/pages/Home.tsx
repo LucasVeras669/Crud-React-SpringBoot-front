@@ -37,19 +37,20 @@ export const Home = () => {
 
   const [open, setOpen] = useState(false);
 
-  const handlePageForm = (item: any) => {
-    console.log(item, 'item')
-    // setOpen(true)
+  const handlePageForm = () => {
+    setOpen(true)
   }
 
-  const handleChangePage = (newPage:any) => {
+  const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (event:any) => {
+  const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
+
+  console.log(busca)
 
   const tarefasFiltradas = rows.filter((tarefa) =>
     tarefa.titulo.includes(busca)
@@ -59,15 +60,10 @@ export const Home = () => {
     page * rowsPerPage,
     page * rowsPerPage + rowsPerPage
   );
-  console.log(paginatedTasks)
-  
+
   const clean = () => {
     setBusca("");
   };
-
-  const handleBuscar = () => {
-    search()
-  }
  
   const search = useCallback(() => {
     setIsLoading(true);
@@ -159,8 +155,8 @@ export const Home = () => {
                 <TableCell align="center">{row.status}</TableCell>
                 <TableCell align="center">{row.dataConclusao}</TableCell>
                 <TableCell align="center">
-                  <Button onClick={() =>handlePageForm(row)}>EDITAR</Button>
-                  <Button onClick={() => handleDelete(row.id)} color="error">APAGAR</Button>
+                  <Button onClick={handlePageForm}>Editar</Button>
+                  <Button onClick={() => handleDelete(row.id)} color="error">Apagr</Button>
                 </TableCell>
               </TableRow>
             ))}
@@ -188,7 +184,7 @@ export const Home = () => {
                     labelDisplayedRows={({ from, to, count }) =>
                       `${from}-${to} de ${count}`
                     }
-                    
+          
                   />
                 </TableCell>
               </TableRow>
@@ -196,9 +192,9 @@ export const Home = () => {
           </TableFooter>
         </Table>
       </TableContainer>
-      {open && (
-              <Form buscar={handleBuscar}/>
-            )}
+      {/* {open && (
+              <Form/>
+            )} */}
     </Box>
   );
 };

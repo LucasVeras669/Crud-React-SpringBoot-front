@@ -2,11 +2,11 @@ import { Api } from "../../shared/api/axios-config";
 import { Environment } from "../../shared/environment";
 
 export interface IListagemTarefas {
-  id: number;
+  id: number | string;
   titulo: string;
   descricao: string;
   dataCriacao: string;
-  dataConclusao: string;
+  dataConclusao: string | null;
   status: 'ABERTO' | 'ANDAMENTO' | 'FECHADO'
 
 }
@@ -14,7 +14,7 @@ export interface IListagemTarefas {
 export interface IDetalheTarefas {
   titulo: string;
   descricao: string;
-  dataCriacao: string ;
+  dataCriacao: string;
   dataConclusao: string | null;
   status: string
 
@@ -57,7 +57,6 @@ const getById = async (id: number): Promise<IDetalheTarefas | Error> => {
     );
   }
 };
-
 
 
 const create = async (dados: IDetalheTarefas) => {
