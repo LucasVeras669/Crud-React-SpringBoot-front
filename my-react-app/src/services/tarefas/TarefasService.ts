@@ -2,36 +2,41 @@ import { Api } from "../../shared/api/axios-config";
 import { Environment } from "../../shared/environment";
 
 export interface IListagemTarefas {
-  id: number | string;
+  id?: number | string;
   titulo: string;
   descricao: string;
   dataCriacao: string;
   dataConclusao: string | null;
-  status: 'ABERTO' | 'ANDAMENTO' | 'FECHADO'
-
+  status: "ABERTO" | "ANDAMENTO" | "FECHADO";
 }
 
 export interface IDetalheTarefas {
-  titulo: string;
-  descricao: string;
-  dataCriacao: string;
-  dataConclusao: string | null;
-  status: string
-
+    id?: number | string;
+    titulo?: string;
+    descricao?: string;
+    dataCriacao?: string;
+    dataConclusao?: string | null;
+    status?: string;
 }
+
+export type TDetalheTarefasData = {
+  data: IDetalheTarefas[];
+};
 
 export type TTarefasComTotalCount = {
   data: IListagemTarefas[];
-  totalCount: number
+  totalCount: number;
 };
 
 const getAll = async (): Promise<TTarefasComTotalCount | Error> => {
   try {
-    const { data, headers} = await Api.get("/tarefas");
+    const { data, headers } = await Api.get("/tarefas");
     if (data) {
       return {
         data,
-        totalCount: Number(headers['x-total-count'] || Environment.LIMITE_DE_LINHAS )
+        totalCount: Number(
+          headers["x-total-count"] || Environment.LIMITE_DE_LINHAS
+        ),
       };
     }
 
@@ -43,7 +48,9 @@ const getAll = async (): Promise<TTarefasComTotalCount | Error> => {
   }
 };
 
-const getById = async (id: number): Promise<IDetalheTarefas | Error> => {
+const getById = async (
+  id: number | string
+): Promise<IDetalheTarefas | Error> => {
   try {
     const { data } = await Api.get(`/tarefas/${id}`);
     if (data) {
@@ -58,13 +65,11 @@ const getById = async (id: number): Promise<IDetalheTarefas | Error> => {
   }
 };
 
-
 const create = async (dados: IDetalheTarefas) => {
   try {
     const { data } = await Api.post<IDetalheTarefas>("/tarefas", dados);
-    
-    console.log(data)
-  
+
+    console.log(data);
   } catch (error) {
     return new Error(
       (error as { message: string }).message || "Erro ao criar os registros"
@@ -73,7 +78,7 @@ const create = async (dados: IDetalheTarefas) => {
 };
 
 const updateById = async (
-  id: number,
+  id: number | string,
   dados: IDetalheTarefas
 ): Promise<void | Error> => {
   try {
@@ -85,7 +90,9 @@ const updateById = async (
   }
 };
 
-const deleteById = async (id: number): Promise<void | Error> => {
+const deleteById = async (
+  id: number | string | undefined
+): Promise<void | Error> => {
   try {
     await Api.delete(`/tarefas/${id}`);
   } catch (error) {

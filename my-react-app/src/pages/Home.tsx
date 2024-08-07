@@ -20,6 +20,7 @@ import {
   TextField,
 } from "@mui/material";
 import {
+  IDetalheTarefas,
   IListagemTarefas,
   TarefasService,
 } from "../services/tarefas/TarefasService";
@@ -37,8 +38,54 @@ export const Home = () => {
 
   const [open, setOpen] = useState(false);
 
-  const handlePageForm = () => {
-    setOpen(true)
+  const [detail, setDetail] = useState<IDetalheTarefas>({
+    id: "",
+    titulo: "",
+    descricao: "",
+    dataCriacao: "",
+    dataConclusao: null,
+    status: "",
+  });
+
+  const handlePageForm = async (id: number | string) => {
+    const result = await TarefasService.getById(id);
+
+    if (result instanceof Error) {
+      alert(result.message);
+    } else {
+      // Aqui vamos assumir que `result.data` é uma lista e queremos a tarefa com o id especificado
+      if(result) {
+        setDetail({
+          id: result.id,
+          titulo: result.titulo,
+          descricao: result.descricao,
+          dataCriacao: result.dataCriacao,
+          dataConclusao: result.dataConclusao,
+          status: result.status,
+        });
+      }
+      
+      
+      setOpen(true);
+    }
+  };
+
+  const OpenCreatePageForm = () => {
+    setDetail({
+      id: "",
+      titulo: "",
+      descricao: "",
+      dataCriacao: "",
+      dataConclusao: "",
+      status: ""
+    });
+
+    setOpen(!open)
+
+}
+
+  const handleDetail = () => {
+    console.log(detail)
   }
 
   const handleChangePage = (event, newPage) => {
@@ -49,8 +96,6 @@ export const Home = () => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-
-  console.log(busca)
 
   const tarefasFiltradas = rows.filter((tarefa) =>
     tarefa.titulo.includes(busca)
@@ -64,7 +109,7 @@ export const Home = () => {
   const clean = () => {
     setBusca("");
   };
- 
+
   const search = useCallback(() => {
     setIsLoading(true);
     debounce(() => {
@@ -77,11 +122,14 @@ export const Home = () => {
         }
       });
     });
+  }, [debounce]);
 
-  }, [debounce])
+  const handleBuscar = () => {
+    search();
+  };
 
-  const handleDelete = (id: number) => {
-    console.log(id) 
+  const handleDelete = (id: number | string | undefined) => {
+    console.log(id);
     if (confirm("Realmente deseja apagar?")) {
       TarefasService.deleteById(id).then((result) => {
         if (result instanceof Error) {
@@ -95,12 +143,13 @@ export const Home = () => {
         }
       });
     }
-  }
-
+  };
 
   useEffect(() => {
     search();
   }, [search]);
+
+
 
   return (
     <Box boxSizing="border-box" marginLeft="4px" marginRight="4px">
@@ -128,10 +177,8 @@ export const Home = () => {
         <ButtonGroup>
           <Button onClick={clean}>Limpar</Button>
           <Button onClick={search}>Consultar </Button>
-          <Button onClick={handlePageForm}>Nova Tarefa</Button>
-          
+          <Button onClick={OpenCreatePageForm}>Nova Tarefa</Button>
         </ButtonGroup>
-        
       </Box>
 
       <TableContainer component={Paper} variant="outlined">
@@ -155,8 +202,12 @@ export const Home = () => {
                 <TableCell align="center">{row.status}</TableCell>
                 <TableCell align="center">{row.dataConclusao}</TableCell>
                 <TableCell align="center">
-                  <Button onClick={handlePageForm}>Editar</Button>
-                  <Button onClick={() => handleDelete(row.id)} color="error">Apagr</Button>
+                  <Button onClick={() => handlePageForm(row.id)}>
+                    Editar
+                  </Button>
+                  <Button onClick={() => handleDelete(row.id)} color="error">
+                    Apagar
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}
@@ -184,7 +235,6 @@ export const Home = () => {
                     labelDisplayedRows={({ from, to, count }) =>
                       `${from}-${to} de ${count}`
                     }
-          
                   />
                 </TableCell>
               </TableRow>
@@ -192,9 +242,7 @@ export const Home = () => {
           </TableFooter>
         </Table>
       </TableContainer>
-      {/* {open && (
-              <Form/>
-            )} */}
+      {open && <Form buscar={handleBuscar} handleDetail={handleDetail} detail = {detail} setDetail ={setDetail} />}
     </Box>
   );
 };

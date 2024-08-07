@@ -11,10 +11,10 @@ import {
   TextField,
 } from "@mui/material";
 import { Calendario } from "../calendario/Calendario";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { TarefasService } from "../../../services/tarefas/TarefasService";
 
-export const Form = ({buscar}) => {
+export const Form = ({buscar, handleDetail, detail, setDetail }: any) => {
   const [titulo, setTitulo] = useState('')
   console.log(titulo)
   const [descricao, setDescricao] = useState('')
@@ -23,11 +23,18 @@ export const Form = ({buscar}) => {
 
   const handleStatus = (event: SelectChangeEvent) => {
     setStatus(event.target.value as string);
+
   };
+  
+  const handleDetailStatus = (event: SelectChangeEvent) => {
+    setDetail({...detail, status: event.target.value as string});
+  };
+
 
 
  const salvar = () =>{
 
+  if(!detail) {
     const objeto = {
       titulo: titulo,
       descricao: descricao,
@@ -49,10 +56,19 @@ export const Form = ({buscar}) => {
   })
   .finally(()=>{
     buscar()
+
   })
+
+  } else {
+    console.log("Entrou aqui na mudança ", detail)
+  }
+   
  
  }
 
+ useEffect(()=> {
+  handleDetail()
+ }, [handleDetail])
 
   return (
     <Box minHeight="80vh">
@@ -70,8 +86,9 @@ export const Form = ({buscar}) => {
               <Box width="50%">
                 <TextField 
                 placeholder="Título" 
+                value={detail ? detail.titulo : titulo}
                 size="small" fullWidth
-                onChange={(e)=> setTitulo(e.target.value)}
+                onChange={detail ? (e) => setDetail({...detail, titulo: e.target.value}) : (e) => setTitulo(e.target.value)}
                 >
                   Titulo
                 </TextField>
@@ -80,8 +97,9 @@ export const Form = ({buscar}) => {
                 <TextField 
                 placeholder="Descrição" 
                 size="small" 
+                value={detail ? detail.descricao : descricao}
                 fullWidth
-                onChange={(e)=> setDescricao(e.target.value)}
+                onChange={detail ? (e) => setDetail({...detail, descricao: e.target.value}) : (e) => setDescricao(e.target.value)}
                 >
                   Descrição
                 </TextField>
@@ -101,16 +119,14 @@ export const Form = ({buscar}) => {
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         label="Status"
-                        onChange={handleStatus}
+                        value={detail ? detail.status : status}
+                        onChange={detail ? handleDetailStatus : handleStatus}
                       >
                         <MenuItem value='ABERTO'>ABERTO</MenuItem>
                         <MenuItem value='ANDAMENTO'>ANDAMENTO</MenuItem>
                         <MenuItem value='FECHADO'>FECHADO</MenuItem>
                       </Select>
                     </FormControl>
-                  </Box>
-                  <Box width="50%">
-                    {/* <Calendario /> */}
                   </Box>
                 </Box>
               </Box>
