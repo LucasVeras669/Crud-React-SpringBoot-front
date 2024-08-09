@@ -2,7 +2,7 @@ import { Api } from "../../shared/api/axios-config";
 import { Environment } from "../../shared/environment";
 
 export interface IListagemTarefas {
-  id?: number | string;
+  id: number | string | undefined
   titulo: string;
   descricao: string;
   dataCriacao: string;
@@ -11,7 +11,7 @@ export interface IListagemTarefas {
 }
 
 export interface IDetalheTarefas {
-    id?: number | string;
+    id: number | string | undefined
     titulo?: string;
     descricao?: string;
     dataCriacao?: string;
@@ -49,7 +49,7 @@ const getAll = async (): Promise<TTarefasComTotalCount | Error> => {
 };
 
 const getById = async (
-  id: number | string
+  id: number | string | undefined
 ): Promise<IDetalheTarefas | Error> => {
   try {
     const { data } = await Api.get(`/tarefas/${id}`);
@@ -78,7 +78,7 @@ const create = async (dados: IDetalheTarefas) => {
 };
 
 const updateById = async (
-  id: number | string,
+  id: number | string | undefined,
   dados: IDetalheTarefas
 ): Promise<void | Error> => {
   try {

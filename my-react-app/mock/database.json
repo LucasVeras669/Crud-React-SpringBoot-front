@@ -3,7 +3,7 @@
     {
       "id": "4244",
       "titulo": "Tarefa 1",
-      "descricao": "Criar um dashboard",
+      "descricao": "Criar um dashboard 1",
       "dataCriacao": "05/08/2024",
       "dataConclusao": null,
       "status": "ABERTO"
@@ -17,76 +17,36 @@
       "status": "ABERTO"
     },
     {
-      "id": "1e9e",
+      "id": "3aad",
       "titulo": "Tarefa 3",
       "descricao": "Criar um dashboard 3",
-      "dataCriacao": "05/08/2024",
+      "dataCriacao": "09/08/2024",
       "dataConclusao": null,
       "status": "ABERTO"
     },
     {
-      "id": "683b",
+      "id": "76a2",
       "titulo": "Tarefa 4",
       "descricao": "Criar um dashboard 4",
-      "dataCriacao": "05/08/2024",
+      "dataCriacao": "09/08/2024",
       "dataConclusao": null,
-      "status": "ANDAMENTO"
+      "status": "ABERTO"
     },
     {
-      "id": "8664",
+      "id": "84ec",
       "titulo": "Tarefa 5",
       "descricao": "Criar um dashboard 5",
-      "dataCriacao": "05/08/2024",
+      "dataCriacao": "09/08/2024",
       "dataConclusao": null,
-      "status": "ANDAMENTO"
+      "status": "ABERTO"
     },
     {
-      "id": "5a6c",
+      "id": "b5dd",
       "titulo": "Tarefa 6",
       "descricao": "Criar um dashboard 6",
-      "dataCriacao": "05/08/2024",
-      "dataConclusao": null,
-      "status": "ANDAMENTO"
-    },
-    {
-      "id": "fb97",
-      "titulo": "Tarefa 7",
-      "descricao": "Criar um dashboard 6",
-      "dataCriacao": "05/08/2024",
+      "dataCriacao": "09/08/2024",
       "dataConclusao": null,
       "status": "ABERTO"
-    },
-    {
-      "id": "0848",
-      "titulo": "Tarefa 8",
-      "descricao": "Criar um dashboard 8",
-      "dataCriacao": "05/08/2024",
-      "dataConclusao": null,
-      "status": "ABERTO"
-    },
-    {
-      "id": "9181",
-      "titulo": "Tarefa 9",
-      "descricao": "Criar um dashboard 8",
-      "dataCriacao": "05/08/2024",
-      "dataConclusao": null,
-      "status": "ANDAMENTO"
-    },
-    {
-      "id": "1892",
-      "titulo": "Tarefa 10",
-      "descricao": "Criar um dashboard 10",
-      "dataCriacao": "05/08/2024",
-      "dataConclusao": null,
-      "status": "ABERTO"
-    },
-    {
-      "id": "462a",
-      "titulo": "Tarefa 11",
-      "descricao": "Criar um dashboard 10",
-      "dataCriacao": "05/08/2024",
-      "dataConclusao": null,
-      "status": "ANDAMENTO"
     }
   ]
 }

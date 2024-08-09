@@ -10,65 +10,83 @@ import {
   SelectChangeEvent,
   TextField,
 } from "@mui/material";
-import { Calendario } from "../calendario/Calendario";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { TarefasService } from "../../../services/tarefas/TarefasService";
 
-export const Form = ({buscar, handleDetail, detail, setDetail }: any) => {
-  const [titulo, setTitulo] = useState('')
-  console.log(titulo)
-  const [descricao, setDescricao] = useState('')
-  const [status, setStatus] = useState('')
-  console.log(status)
+export const Form = ({ buscar, handleDetail, detail, setDetail }: any) => {
+  const [titulo, setTitulo] = useState("");
+
+  const [descricao, setDescricao] = useState("");
+  const [status, setStatus] = useState("");
 
   const handleStatus = (event: SelectChangeEvent) => {
     setStatus(event.target.value as string);
-
   };
-  
+
   const handleDetailStatus = (event: SelectChangeEvent) => {
-    setDetail({...detail, status: event.target.value as string});
+    setDetail({ ...detail, status: event.target.value as string });
   };
 
+  const handleUpdate = async (id: number | string | undefined) => {
+    const result = await TarefasService.updateById(id, detail)
+      .then((result: any) => {
+        if (result instanceof Error) {
+          console.log("entrou aqui");
+          alert(result.message);
+        } else {
+          alert("Tarefa editada com sucesso!");
+        }
+      })
+      .finally(() => {
+        buscar();
+      });
+  };
 
-
- const salvar = () =>{
-
-  if(!detail) {
+  const handleSalve = () => {
     const objeto = {
       titulo: titulo,
       descricao: descricao,
       dataCriacao: new Date().toLocaleDateString(),
       dataConclusao: null,
-      status: status
-    }
-    
+      status: status,
+    };
+
+
     TarefasService.create(objeto)
-  .then((result) => {
-    if (result instanceof Error) {
-      console.error('Erro ao criar a tarefa:', result.message);
+      .then((result) => {
+        if (result instanceof Error) {
+          alert("Erro ao criar a tarefa:");
+        } else {
+          
+          alert("Tarefa criada com sucesso");
+        }
+        setTitulo('')
+        setDescricao('')
+        setStatus('')
+      })
+      .catch((error) => {
+        alert("Erro inesperado:");
+      })
+      .finally(() => {
+        buscar();
+      });
+  };
+
+  const salvar = () => {
+    if (!detail.id) {
+      handleSalve()
     } else {
-      console.log('Tarefa criada com sucesso. ID:', result);
+      handleUpdate(detail.id);
     }
-  })
-  .catch((error) => {
-    console.error('Erro inesperado:', error);
-  })
-  .finally(()=>{
-    buscar()
+  };
 
-  })
+  useEffect(() => {
+    console.log(detail);
+  });
 
-  } else {
-    console.log("Entrou aqui na mudança ", detail)
-  }
-   
- 
- }
-
- useEffect(()=> {
-  handleDetail()
- }, [handleDetail])
+  useEffect(() => {
+    handleDetail();
+  }, [handleDetail]);
 
   return (
     <Box minHeight="80vh">
@@ -84,22 +102,32 @@ export const Form = ({buscar, handleDetail, detail, setDetail }: any) => {
           <FormControl>
             <Box display="flex" width="100%" gap={1}>
               <Box width="50%">
-                <TextField 
-                placeholder="Título" 
-                value={detail ? detail.titulo : titulo}
-                size="small" fullWidth
-                onChange={detail ? (e) => setDetail({...detail, titulo: e.target.value}) : (e) => setTitulo(e.target.value)}
+                <TextField
+                  placeholder="Título"
+                  value={detail.id ? detail.titulo : titulo}
+                  size="small"
+                  fullWidth
+                  onChange={
+                    detail.id
+                      ? (e) => setDetail({ ...detail, titulo: e.target.value })
+                      : (e) => setTitulo(e.target.value)
+                  }
                 >
                   Titulo
                 </TextField>
               </Box>
               <Box width="50%">
-                <TextField 
-                placeholder="Descrição" 
-                size="small" 
-                value={detail ? detail.descricao : descricao}
-                fullWidth
-                onChange={detail ? (e) => setDetail({...detail, descricao: e.target.value}) : (e) => setDescricao(e.target.value)}
+                <TextField
+                  placeholder="Descrição"
+                  size="small"
+                  value={detail.id ? detail.descricao : descricao}
+                  fullWidth
+                  onChange={
+                    detail.id
+                      ? (e) =>
+                          setDetail({ ...detail, descricao: e.target.value })
+                      : (e) => setDescricao(e.target.value)
+                  }
                 >
                   Descrição
                 </TextField>
@@ -114,17 +142,19 @@ export const Form = ({buscar, handleDetail, detail, setDetail }: any) => {
                 <Box display="flex">
                   <Box width="50%">
                     <FormControl fullWidth>
-                      <InputLabel id="demo-simple-select-label">Status</InputLabel>
+                      <InputLabel id="demo-simple-select-label">
+                        Status
+                      </InputLabel>
                       <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         label="Status"
-                        value={detail ? detail.status : status}
-                        onChange={detail ? handleDetailStatus : handleStatus}
+                        value={detail.id? detail.status : status}
+                        onChange={detail.id ? handleDetailStatus : handleStatus}
                       >
-                        <MenuItem value='ABERTO'>ABERTO</MenuItem>
-                        <MenuItem value='ANDAMENTO'>ANDAMENTO</MenuItem>
-                        <MenuItem value='FECHADO'>FECHADO</MenuItem>
+                        <MenuItem value="ABERTO">ABERTO</MenuItem>
+                        <MenuItem value="ANDAMENTO">ANDAMENTO</MenuItem>
+                        <MenuItem value="FECHADO">FECHADO</MenuItem>
                       </Select>
                     </FormControl>
                   </Box>

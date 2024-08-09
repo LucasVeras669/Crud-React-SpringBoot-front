@@ -47,7 +47,7 @@ export const Home = () => {
     status: "",
   });
 
-  const handlePageForm = async (id: number | string) => {
+  const handlePageForm = async (id: number | string | undefined) => {
     const result = await TarefasService.getById(id);
 
     if (result instanceof Error) {
@@ -65,8 +65,8 @@ export const Home = () => {
         });
       }
       
-      
       setOpen(true);
+      
     }
   };
 
@@ -85,7 +85,7 @@ export const Home = () => {
 }
 
   const handleDetail = () => {
-    console.log(detail)
+    return detail
   }
 
   const handleChangePage = (event, newPage) => {
@@ -129,7 +129,6 @@ export const Home = () => {
   };
 
   const handleDelete = (id: number | string | undefined) => {
-    console.log(id);
     if (confirm("Realmente deseja apagar?")) {
       TarefasService.deleteById(id).then((result) => {
         if (result instanceof Error) {
@@ -242,7 +241,7 @@ export const Home = () => {
           </TableFooter>
         </Table>
       </TableContainer>
-      {open && <Form buscar={handleBuscar} handleDetail={handleDetail} detail = {detail} setDetail ={setDetail} />}
+      {open && <Form rows={rows} setRows = {setRows} buscar={handleBuscar} handleDetail={handleDetail} detail = {detail} setDetail ={setDetail} />}
     </Box>
   );
 };
